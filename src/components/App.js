@@ -9,11 +9,7 @@ const App = () => {
   const [editValue, setEditValue] = useState("");
 
   function handleDelete(i) {
-    return item.filter((elem, index) => {
-      if (index !== i) {
-        return elem;
-      }
-    });
+    return item.filter((elem, index) => index !== i);
   }
 
   function handleEdit(i) {
@@ -31,8 +27,7 @@ const App = () => {
   return (
     <div>
       <div className="add_tasks_section">
-        <input
-          type="text"
+        <textarea
           placeholder="Enter The Todos"
           value={value}
           onChange={(e) => Setvalue(e.target.value)}
@@ -43,40 +38,34 @@ const App = () => {
       <div className="tasks_section">
         <ul>
           {item.length > 0 &&
-            item.map((elem, index) => {
-              return (
-                <li key={index} className="task">
-                  {editIndex === index ? (
-                    <>
-                      <input
-                        type="text"
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                      />
-                      <button className="save" onClick={() => saveTask(index)}>
-                        Save
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      {elem}
-                      <button
-                        className="edit"
-                        onClick={() => handleEdit(index)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="delete"
-                        onClick={() => Setitem(handleDelete(index))}
-                      >
-                        Delete
-                      </button>
-                    </>
-                  )}
-                </li>
-              );
-            })}
+            item.map((elem, index) => (
+              <li key={index} className="task">
+                {editIndex === index ? (
+                  <>
+                    <textarea
+                      value={editValue}
+                      onChange={(e) => setEditValue(e.target.value)}
+                    />
+                    <button className="save" onClick={() => saveTask(index)}>
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {elem}
+                    <button className="edit" onClick={() => handleEdit(index)}>
+                      Edit
+                    </button>
+                    <button
+                      className="delete"
+                      onClick={() => Setitem(handleDelete(index))}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
