@@ -27,6 +27,7 @@ const App = () => {
   return (
     <div>
       <div className="add_tasks_section">
+        <h3>To-Do List</h3>
         <textarea
           placeholder="Enter The Todos"
           value={value}
@@ -39,20 +40,24 @@ const App = () => {
         <ul>
           {item.length > 0 &&
             item.map((elem, index) => (
-              <li key={index} className="task">
-                {editIndex === index ? (
-                  <>
+              <React.Fragment key={index}>
+                <li className="task">
+                  {editIndex === index ? (
                     <textarea
                       value={editValue}
                       onChange={(e) => setEditValue(e.target.value)}
                     />
-                    <button className="save" onClick={() => saveTask(index)}>
-                      Save
-                    </button>
-                  </>
+                  ) : (
+                    elem
+                  )}
+                </li>
+
+                {editIndex === index ? (
+                  <button className="save" onClick={() => saveTask(index)}>
+                    Save
+                  </button>
                 ) : (
                   <>
-                    {elem}
                     <button className="edit" onClick={() => handleEdit(index)}>
                       Edit
                     </button>
@@ -64,7 +69,7 @@ const App = () => {
                     </button>
                   </>
                 )}
-              </li>
+              </React.Fragment>
             ))}
         </ul>
       </div>
