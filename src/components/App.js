@@ -1,13 +1,86 @@
-
 import React from "react";
-import './../styles/App.css';
+import "./../styles/App.css";
+import { useState } from "react";
 
 const App = () => {
+  const [item, Setitem] = useState([]);
+  const [value, Setvalue] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+  const [editValue, setEditValue] = useState("");
+
+  function handleDelete(i) {
+    return item.filter((elem, index) => {
+      if (index !== i) {
+        return elem;
+      }
+    });
+  }
+
+  function handleEdit(i) {
+    setEditIndex(i);
+    setEditValue(item[i]);
+  }
+
+  function saveTask(i) {
+    let updated = [...item];
+    updated[i] = editValue;
+    Setitem(updated);
+    setEditIndex(null);
+  }
+
   return (
     <div>
-        {/* Do not remove the main div */}
-    </div>
-  )
-}
+      <div className="add_tasks_section">
+        <input
+          type="text"
+          placeholder="Enter The Todos"
+          value={value}
+          onChange={(e) => Setvalue(e.target.value)}
+        />
+        <button onClick={() => Setitem([...item, value])}>Add Todo</button>
+      </div>
 
-export default App
+      <div className="tasks_section">
+        <ul>
+          {item.length > 0 &&
+            item.map((elem, index) => {
+              return (
+                <li key={index} className="task">
+                  {editIndex === index ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editValue}
+                        onChange={(e) => setEditValue(e.target.value)}
+                      />
+                      <button className="save" onClick={() => saveTask(index)}>
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      {elem}
+                      <button
+                        className="edit"
+                        onClick={() => handleEdit(index)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete"
+                        onClick={() => Setitem(handleDelete(index))}
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default App;
