@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div>
-      <div className="add_tasks_section">
+      <div className="add_tasks_section" style={{ textAlign: "center" }}>
         <h3>To Do List</h3>
         <textarea
           placeholder="Enter The Todos"
