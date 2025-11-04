@@ -27,7 +27,7 @@ const App = () => {
   return (
     <div>
       <div className="add_tasks_section">
-        <h3>To-Do List</h3>
+        <h3>To Do List</h3>
         <textarea
           placeholder="Enter The Todos"
           value={value}
