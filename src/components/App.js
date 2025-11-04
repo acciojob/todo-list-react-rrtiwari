@@ -37,9 +37,9 @@ const App = () => {
       </div>
 
       <div className="tasks_section">
-        <ul>
-          {item.length > 0 &&
-            item.map((elem, index) => (
+        {item.length > 0 && (
+          <ul>
+            {item.map((elem, index) => (
               <React.Fragment key={index}>
                 <li className="task">
                   {editIndex === index ? (
@@ -71,7 +71,8 @@ const App = () => {
                 )}
               </React.Fragment>
             ))}
-        </ul>
+          </ul>
+        )}
       </div>
     </div>
   );
